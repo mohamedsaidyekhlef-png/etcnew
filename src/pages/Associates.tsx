@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
-import { Button } from '../components/ui/Button';
+import { Mail, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ASSOCIATES = [
@@ -44,56 +43,77 @@ const ASSOCIATES = [
 
 export const Associates = () => {
   return (
-    <div className="pt-20 bg-cream min-h-screen">
-      <div className="bg-primary text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="font-serif text-5xl font-bold mb-6">ETC Associates</h1>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+    <div className="pt-20 bg-[#0B1121] min-h-screen text-white selection:bg-brand-orange selection:text-white font-sans">
+      
+      {/* Header */}
+      <div className="relative py-20 border-b border-white/5 overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-brand-orange/5 blur-[100px] pointer-events-none" />
+        
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+            ETC Associates
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">
             Meet the world-class team driving transformation alongside Eileen.
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16">
-        <div className="mb-8">
-           <Link to="/about" className="text-primary hover:text-secondary font-medium flex items-center gap-2">
-             ← Back to About Eileen
+      <div className="container mx-auto px-6 py-16 max-w-6xl">
+        <div className="mb-16">
+           <Link to="/about" className="text-brand-orange hover:text-white transition-colors font-medium flex items-center gap-2 inline-flex group">
+             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Back to About Eileen
            </Link>
         </div>
 
-        <div className="space-y-24">
+        <div className="space-y-32">
           {ASSOCIATES.map((associate, index) => (
             <motion.div 
               key={associate.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col lg:flex-row gap-12 items-start"
+              transition={{ delay: index * 0.1 }}
+              className="flex flex-col lg:flex-row gap-16 items-start"
             >
-              {/* Placeholder Photo */}
-              <div className="w-full lg:w-1/3 shrink-0">
-                <div className="aspect-[3/4] bg-gray-200 rounded-lg overflow-hidden relative group">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400 font-serif text-lg">
-                    {associate.name.split(' ')[0]} Photo
+              {/* Premium Photo Frame */}
+              <div className="w-full lg:w-1/3 shrink-0 relative group">
+                  {/* Decorative Elements */}
+                  <div className="absolute -inset-3 bg-gradient-to-r from-brand-orange/20 to-brand-green/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-700" />
+                  <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-brand-orange/50 rounded-tl-2xl z-20" />
+                  <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-brand-green/50 rounded-br-2xl z-20" />
+                  
+                  {/* Image Container */}
+                  <div className="aspect-[3/4] bg-[#0f172a] border border-white/10 rounded-xl overflow-hidden relative z-10 shadow-2xl">
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-600 font-display text-lg">
+                       {/* Placeholder logic */}
+                       <span className="opacity-50 tracking-widest uppercase">{associate.name.split(' ')[0]}</span>
+                    </div>
+                    {/* Overlay gradient for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1121] via-transparent to-transparent opacity-60" />
                   </div>
-                  {/* Overlay for visual polish */}
-                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
-                </div>
-                <div className="mt-6 text-center lg:text-left">
-                  <h3 className="font-serif text-2xl font-bold text-charcoal">{associate.name}</h3>
-                  <p className="text-secondary font-medium mb-4">{associate.role}</p>
-                  <a href={`mailto:${associate.email}`} className="inline-flex items-center text-charcoal/70 hover:text-primary transition-colors">
-                    <Mail size={16} className="mr-2" />
-                    {associate.email}
-                  </a>
-                </div>
               </div>
 
-              {/* Bio */}
-              <div className="w-full lg:w-2/3 prose prose-lg prose-p:text-charcoal/80 max-w-none">
-                {associate.bio.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
+              {/* Bio Content */}
+              <div className="w-full lg:w-2/3">
+                <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">{associate.name}</h3>
+                <p className="text-brand-orange font-medium text-lg mb-8 tracking-wide uppercase text-sm">{associate.role}</p>
+                
+                <div className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed space-y-6">
+                  {associate.bio.map((paragraph, i) => (
+                    <p key={i} className="font-light">{paragraph}</p>
+                  ))}
+                </div>
+
+                <div className="mt-10 pt-8 border-t border-white/10">
+                  <a href={`mailto:${associate.email}`} className="inline-flex items-center text-gray-400 hover:text-brand-orange transition-colors group">
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-3 group-hover:bg-brand-orange/10 border border-white/5 group-hover:border-brand-orange/30 transition-all">
+                        <Mail size={18} />
+                    </div>
+                    <span className="font-medium">{associate.email}</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}

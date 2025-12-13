@@ -1,5 +1,4 @@
 import { cn } from '../../lib/utils';
-import { Link } from 'react-router-dom';
 
 interface LogoProps {
   className?: string;
@@ -8,16 +7,16 @@ interface LogoProps {
 
 export const Logo = ({ className, variant = 'dark' }: LogoProps) => {
   return (
-    <div className={cn("relative flex items-center", className)}>
+    <div className={cn("relative flex items-center justify-center", className)}>
+      {/* Glow Effect behind the logo */}
+      <div className="absolute inset-0 bg-brand-orange/20 blur-xl rounded-full pointer-events-none" />
+      
       <img
         src="https://i.postimg.cc/6p62JhWv/Chat-GPT-Image-Dec-11-2025-12-53-24-AM.png"
         alt="ETC Consulting"
         className={cn(
-          "h-full w-auto object-contain",
-          // Removing mix-blend-multiply if we want to show the logo as is, 
-          // or keeping it if the background is white. 
-          // Given the request "fit the frame", object-contain is key.
-          "max-h-[60px]" 
+          "relative z-10 h-full w-auto object-contain drop-shadow-[0_0_15px_rgba(244,157,17,0.3)]",
+          // Removing max-h constraint here to let parent control size
         )}
       />
     </div>

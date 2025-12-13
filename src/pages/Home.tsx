@@ -1,215 +1,248 @@
-import { motion } from 'framer-motion';
-import { ArrowDown, Quote } from 'lucide-react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Compass, Users, Hexagon, Play, BarChart3, Globe2, Zap } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ExplorationForm } from '../components/sections/ExplorationForm';
-import { SERVICES, TESTIMONIALS, CORE_VALUES, BLOG_POSTS } from '../data/content';
 import { Link } from 'react-router-dom';
 
+// --- MODERN COMPONENTS ---
+
+const StatCard = ({ value, label, icon: Icon }: any) => (
+  <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex items-center gap-4 hover:bg-white/10 transition-colors group">
+    <div className="w-12 h-12 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange group-hover:scale-110 transition-transform">
+      <Icon size={24} />
+    </div>
+    <div>
+      <div className="text-2xl font-display font-bold text-white">{value}</div>
+      <div className="text-sm text-gray-400">{label}</div>
+    </div>
+  </div>
+);
+
+const FeatureCard = ({ title, desc, icon: Icon, delay }: any) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay }}
+    className="bg-panel border border-white/5 rounded-2xl p-8 hover:border-brand-orange/50 transition-colors group relative overflow-hidden"
+  >
+    <div className="absolute top-0 right-0 p-32 bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-orange/10 transition-colors" />
+    
+    <div className="relative z-10">
+      <div className="w-14 h-14 rounded-2xl bg-void border border-white/10 flex items-center justify-center mb-6 text-white group-hover:text-brand-orange group-hover:border-brand-orange/30 transition-all">
+        <Icon size={28} />
+      </div>
+      <h3 className="text-xl font-display font-bold text-white mb-3">{title}</h3>
+      <p className="text-gray-400 leading-relaxed mb-6">
+        {desc}
+      </p>
+      <Link to="/services" className="inline-flex items-center text-sm font-semibold text-brand-orange hover:text-white transition-colors">
+        Explore Module <ArrowRight size={16} className="ml-2" />
+      </Link>
+    </div>
+  </motion.div>
+);
+
 export const Home = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const yHero = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   return (
-    <div className="bg-cream">
-      {/* HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background Placeholder */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-charcoal/60 z-10" /> {/* Scrim */}
-          <img 
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000" 
-            alt="Office Background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="relative z-20 container mx-auto px-4 text-center text-white">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
-          >
-            The Executive Whisperer®
-          </motion.h1>
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-2xl font-light max-w-3xl mx-auto mb-10 text-white/90 leading-relaxed"
-          >
-            Elevating Fortune 1000 leaders through bespoke coaching & team transformation.
-          </motion.h2>
+    <div ref={containerRef} className="bg-void text-white selection:bg-brand-orange selection:text-white overflow-x-hidden font-sans">
+      
+      {/* --- HERO: SaaS Platform Style --- */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        
+        {/* Background Layer: Image + Pattern + Video */}
+        <div className="absolute inset-0 z-0 pointer-events-none bg-void">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button 
-              onClick={() => document.getElementById('exploration-session')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-merlot hover:bg-white hover:text-charcoal border-none"
-            >
-              Book Your Complimentary Exploration Session
-            </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-charcoal">
-              Watch 2-min story
-            </Button>
-          </motion.div>
-        </div>
-
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2, delay: 4 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50"
-        >
-          <ArrowDown size={32} />
-        </motion.div>
-      </section>
-
-      {/* SECTION 1: VALUE CARDS */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {SERVICES.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="p-8 bg-putty/30 rounded-lg hover:bg-putty transition-colors duration-300 group"
-              >
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm text-merlot group-hover:scale-110 transition-transform duration-300">
-                  <service.icon size={32} strokeWidth={1.5} />
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-charcoal mb-4">{service.title}</h3>
-                <p className="text-charcoal/70 leading-relaxed mb-6">
-                  {service.shortDesc}
-                </p>
-                <Link to="/services" className="inline-flex items-center text-merlot font-medium hover:text-charcoal transition-colors">
-                  Learn more <ArrowDown className="ml-2 -rotate-90" size={16} />
-                </Link>
-              </motion.div>
-            ))}
+          {/* 1. Coaching/Executive Background Image (Visible Fallback/Base) */}
+          <div className="absolute inset-0">
+             <img 
+               src="https://images.unsplash.com/photo-1559223607-a43c990ed91a?q=80&w=2574&auto=format&fit=crop" 
+               alt="Executive Coaching Session"
+               className="w-full h-full object-cover opacity-60"
+             />
+             {/* Tech Grid Pattern Overlay */}
+             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
           </div>
-        </div>
-      </section>
 
-      {/* SECTION 2: SOCIAL PROOF */}
-      <section className="bg-charcoal py-20 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="relative max-w-4xl mx-auto">
-            {/* Simple rotator implementation */}
+          {/* 2. Video Overlay (Vimeo) - Blended */}
+          <iframe 
+            src="https://player.vimeo.com/video/92261253?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1" 
+            className="absolute top-1/2 left-1/2 w-[177.777%] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40 mix-blend-overlay"
+            frameBorder="0" 
+            allow="autoplay; fullscreen" 
+            title="Hero Video"
+          />
+
+          {/* 3. Gradient Overlays for Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-void/90 via-void/60 to-void/30 z-10" /> 
+          <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-void/40 z-10" />
+        </div>
+
+        {/* Content Container */}
+        <div className="container mx-auto px-6 relative z-30 pt-20">
+          <div className="max-w-4xl">
             <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="pl-8 border-l-4 border-gold"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <Quote className="text-merlot mb-6 fill-merlot" size={48} />
-              <p className="font-serif text-2xl md:text-4xl text-white italic leading-tight mb-8">
-                "{TESTIMONIALS[0].quote}"
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-medium text-brand-orange mb-6 backdrop-blur-md shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+                System v2.5 Live
+              </div>
+              
+              <h1 className="font-display font-bold text-6xl md:text-7xl lg:text-8xl leading-[1.1] mb-8 tracking-tight drop-shadow-2xl">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-orange to-brand-sage bg-[length:200%_auto] animate-text-shimmer">
+                  Operating System
+                </span> 
+                <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-sage via-white to-brand-orange bg-[length:200%_auto] animate-text-shimmer">
+                  for Leadership.
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-200 max-w-2xl mb-10 leading-relaxed drop-shadow-md">
+                We don't just coach. We architect high-performance cultures for Fortune 1000 companies using data-driven transformation strategies.
               </p>
-              <div>
-                <p className="text-white font-bold text-lg">{TESTIMONIALS[0].author}</p>
-                <p className="text-white/60">{TESTIMONIALS[0].role}</p>
+              
+              <div className="flex flex-wrap gap-4 relative z-40">
+                <Link to="/initialize" className="inline-block">
+                  <Button size="lg" className="shadow-lg shadow-brand-orange/20 pointer-events-auto bg-brand-orange hover:bg-orange-600 text-white border-none">
+                    Initialize Transformation
+                  </Button>
+                </Link>
+                <Link to="/case-study" className="inline-block">
+                  <Button variant="secondary" size="lg" className="gap-3 pointer-events-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border-white/20 text-white">
+                    <Play size={18} fill="currentColor" /> Watch Case Study
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
         </div>
+
+        {/* Tech Grid Overlay at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-void to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-green/50 to-transparent z-30 pointer-events-none" />
       </section>
 
-      {/* SECTION 3: MISSION & VALUES */}
-      <section className="py-24 bg-cream">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-3/5">
-              <h2 className="font-serif text-4xl font-bold text-charcoal mb-8">Mission & Vision</h2>
-              <div className="space-y-8 mb-12">
-                <div>
-                  <h3 className="text-gold font-bold uppercase tracking-widest text-sm mb-2">Mission</h3>
-                  <p className="text-xl text-charcoal/80 leading-relaxed">
-                    To ignite curiosity and courage in leaders so they create organisations where people and profit flourish.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-gold font-bold uppercase tracking-widest text-sm mb-2">Vision</h3>
-                  <p className="text-xl text-charcoal/80 leading-relaxed">
-                    A world where every executive leads with humanity, clarity and purpose.
-                  </p>
-                </div>
-              </div>
+      {/* --- SOCIAL PROOF: Ticker --- */}
+      <div className="border-y border-white/5 bg-white/[0.02]">
+        <div className="container mx-auto py-8">
+          <div className="flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+             <span className="text-xl font-display font-bold text-white">SCOOTER'S COFFEE</span>
+             <span className="text-xl font-display font-bold text-white">MEDDEVICE INC.</span>
+             <span className="text-xl font-display font-bold text-white">GLOBAL LOGISTICS</span>
+             <span className="text-xl font-display font-bold text-white">PANDA GROUP</span>
+             <span className="text-xl font-display font-bold text-white">BLOCKBUSTER</span>
+          </div>
+        </div>
+      </div>
 
-              <h3 className="font-serif text-2xl font-bold text-charcoal mb-6">10 Core Values</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {CORE_VALUES.map((val, idx) => (
-                  <div key={idx} className="flex items-start">
-                    <span className="text-gold font-serif font-bold mr-3">{idx + 1}.</span>
+      {/* --- METRICS DASHBOARD --- */}
+      <section className="py-24 relative">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <StatCard value="$4B+" label="Revenue Impact" icon={BarChart3} />
+            <StatCard value="500+" label="CEOs Coached" icon={Users} />
+            <StatCard value="4" label="Continents" icon={Globe2} />
+            <StatCard value="37pt" label="NPS Increase" icon={Zap} />
+          </div>
+        </div>
+      </section>
+
+      {/* --- SERVICES: Bento Grid --- */}
+      <section className="py-24 bg-void relative">
+        {/* Background Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="mb-16">
+            <h2 className="font-display font-bold text-4xl md:text-5xl mb-4">Core Modules</h2>
+            <p className="text-gray-400 text-lg max-w-xl">
+              Scalable interventions designed to debug organizational friction and upgrade leadership capacity.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <FeatureCard 
+              title="Executive Coaching"
+              desc="1:1 strategic partnership to accelerate decision velocity and enhance executive presence."
+              icon={Compass}
+              delay={0.1}
+            />
+            <FeatureCard 
+              title="Team Architecture"
+              desc="Dismantle silos and optimize collective intelligence protocols for high-stakes teams."
+              icon={Users}
+              delay={0.2}
+            />
+            <FeatureCard 
+              title="Enterprise Strategy"
+              desc="Deploy vision and culture updates across the entire organizational stack."
+              icon={Hexagon}
+              delay={0.3}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* --- TESTIMONIALS: Cards --- */}
+      <section className="py-24 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="font-display font-bold text-4xl mb-8">Client Outcomes</h2>
+              <div className="space-y-6">
+                <div className="bg-panel border border-white/5 p-8 rounded-2xl relative">
+                  <div className="absolute -left-1 top-8 w-1 h-12 bg-brand-orange rounded-r-full" />
+                  <p className="text-lg text-gray-300 italic mb-6">
+                    "Eileen quietly changed the trajectory of our $4B division. She speaks boardroom fluently but never loses the human touch."
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gray-700" />
                     <div>
-                      <span className="font-bold text-charcoal">{val.title}</span>
-                      <span className="text-charcoal/60"> – {val.desc}</span>
+                      <div className="font-bold text-white">Joe Thornton</div>
+                      <div className="text-sm text-brand-orange">CEO, Scooter’s Coffee</div>
                     </div>
                   </div>
-                ))}
+                </div>
+                
+                <div className="bg-panel border border-white/5 p-8 rounded-2xl opacity-60 hover:opacity-100 transition-opacity">
+                  <p className="text-lg text-gray-300 italic mb-6">
+                    "Within six months our executive-team NPS jumped 37 points. The ROI was immediate and measurable."
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gray-700" />
+                    <div>
+                      <div className="font-bold text-white">Sara Chen</div>
+                      <div className="text-sm text-brand-orange">CTO, MedDevice Inc.</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div className="lg:w-2/5 w-full h-[500px] bg-charcoal rounded-lg overflow-hidden relative">
-               {/* Silhouette Animation Placeholder */}
-               <div className="absolute inset-0 flex items-center justify-center text-white/20">
-                  <span className="text-center p-8">Looping Animation of Office Silhouettes</span>
+            {/* Visual/Graphic Side */}
+            <div className="relative h-[600px] bg-gradient-to-br from-brand-orange/20 to-brand-green/10 rounded-3xl border border-white/10 overflow-hidden flex items-center justify-center">
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" />
+               <div className="relative z-10 text-center p-8">
+                 <div className="text-8xl font-display font-bold text-white mb-2">35+</div>
+                 <div className="text-xl text-brand-orange uppercase tracking-widest">Years Experience</div>
                </div>
-               <img 
-                 src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000" 
-                 className="w-full h-full object-cover opacity-50 mix-blend-overlay"
-                 alt="Office silhouettes"
-               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 4: INSIGHTS */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="font-serif text-4xl font-bold text-charcoal">Latest Insights</h2>
-            <Link to="/blog" className="hidden md:inline-block text-merlot hover:text-charcoal font-medium transition-colors">
-              View all articles
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {BLOG_POSTS.map((post) => (
-              <article key={post.id} className="group cursor-pointer">
-                <div className="overflow-hidden rounded-lg mb-6 aspect-video">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex items-center gap-4 text-xs font-medium uppercase tracking-wider mb-3">
-                  <span className="text-gold">{post.category}</span>
-                  <span className="text-gray-400">{post.date}</span>
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-charcoal mb-3 group-hover:text-merlot transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <span className="text-merlot font-medium text-sm group-hover:underline">Read more</span>
-              </article>
-            ))}
-          </div>
-          
-          <div className="mt-8 text-center md:hidden">
-             <Link to="/blog" className="text-merlot font-medium">View all articles</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: FORM */}
+      {/* --- FORM SECTION --- */}
       <ExplorationForm />
+
     </div>
   );
 };
