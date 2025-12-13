@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Download, Users, ArrowRight, Award, Briefcase, GraduationCap } from 'lucide-react';
+import { Download, Users, ArrowRight, Award, Briefcase, GraduationCap, Target, Compass } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 
@@ -109,8 +109,111 @@ export const About = () => {
         </div>
       </section>
 
-      {/* --- TIMELINE --- */}
+      {/* --- NEW SECTION: MISSION, COACHING, CONSULTING --- */}
       <section className="py-24 bg-[#0B1121] relative overflow-hidden">
+         {/* Background Texture */}
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10" />
+         <div className="absolute top-1/2 right-0 w-1/2 h-1/2 bg-brand-green/5 blur-[120px] pointer-events-none" />
+         
+         <div className="container mx-auto px-6 relative z-10">
+            
+            {/* Mission */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto text-center mb-24"
+            >
+               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange mb-6">
+                 The Core Philosophy
+               </div>
+               <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-8">Our Mission</h2>
+               <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light mb-8">
+                 The Mission of ETC is to provide a <span className="text-brand-orange italic font-serif">mastery of communication</span>, emotional and social intelligence skills; all designed for you and your organization to achieve success. 
+               </p>
+               <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
+                 We are a personal growth and development company. Our methodology includes Executive Coaching, Team Coaching, consulting and individually customized seminars. Additionally, with management diagnostics, we assist organizations to create <span className="text-white font-medium">alive and in action extraordinary possibilities</span>.
+               </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+               {/* Coaching */}
+               <motion.div 
+                 initial={{ opacity: 0, x: -30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 className="bg-panel p-10 rounded-3xl border border-white/10 hover:border-brand-orange/30 transition-all duration-500 group relative overflow-hidden"
+               >
+                  <div className="absolute top-0 right-0 p-24 bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                  
+                  <div className="w-14 h-14 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-8 text-brand-orange">
+                    <Compass size={28} />
+                  </div>
+
+                  <h3 className="font-display text-3xl font-bold text-white mb-6 group-hover:text-brand-orange transition-colors">Coaching</h3>
+                  <p className="text-gray-300 leading-relaxed mb-8 text-lg">
+                    A coach can help a client see options for becoming a more effective human being. Coaching helps individuals invent changes that are valuable, exciting and intensely personal.
+                  </p>
+                  
+                  <blockquote className="border-l-2 border-brand-orange pl-6 italic text-gray-400 mb-8 text-lg font-display">
+                    "Think of our coaching engagement as bicycle training wheels to give you support, get you started, and help you move forward."
+                  </blockquote>
+                  
+                  <div className="bg-white/5 rounded-xl p-6 border border-white/5">
+                    <p className="text-sm text-gray-400 font-medium mb-3 uppercase tracking-wider">Assessment Tools</p>
+                    <div className="flex flex-wrap gap-2">
+                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">MBTI</span>
+                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">BarOn EQ-I ®</span>
+                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">Brain Pathways 360</span>
+                       <span className="px-3 py-1 rounded-full bg-brand-orange/20 text-xs text-brand-orange border border-brand-orange/20">Executive Whisperer™</span>
+                    </div>
+                  </div>
+               </motion.div>
+
+               {/* Consulting */}
+               <motion.div 
+                 initial={{ opacity: 0, x: 30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 className="bg-panel p-10 rounded-3xl border border-white/10 hover:border-brand-green/30 transition-all duration-500 group relative overflow-hidden"
+               >
+                  <div className="absolute top-0 right-0 p-24 bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                  
+                  <div className="w-14 h-14 bg-brand-green/10 rounded-xl flex items-center justify-center mb-8 text-brand-green">
+                    <Target size={28} />
+                  </div>
+
+                  <h3 className="font-display text-3xl font-bold text-white mb-6 group-hover:text-brand-green transition-colors">Consulting</h3>
+                  <p className="text-gray-300 leading-relaxed mb-8 text-lg">
+                    ETC’s management philosophy has a broad background in business. ETC welcomes the opportunity to come into organizations looking to identify performance gaps through a root cause analysis approach.
+                  </p>
+                  
+                  <div className="space-y-4 pt-4">
+                    <p className="text-sm font-bold text-white uppercase tracking-wider mb-2">Areas of Focus</p>
+                    <ul className="space-y-4">
+                      {[
+                        "Management Diagnostics",
+                        "Executive & Leadership Development",
+                        "Team Development",
+                        "Seminars & Workshops"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-center gap-3 text-gray-300 group/item">
+                          <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover/item:bg-brand-green group-hover/item:text-white transition-all">
+                            <ArrowRight size={14} />
+                          </div>
+                          <span className="text-lg">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+               </motion.div>
+            </div>
+
+         </div>
+      </section>
+
+      {/* --- TIMELINE --- */}
+      <section className="py-24 bg-[#0f172a] relative overflow-hidden border-t border-white/5">
         {/* Background Glow */}
         <div className="absolute top-1/2 left-0 w-1/3 h-full bg-brand-orange/5 blur-[100px] pointer-events-none" />
 
@@ -143,7 +246,7 @@ export const About = () => {
       </section>
 
       {/* --- CREDENTIALS GRID --- */}
-      <section className="py-20 bg-[#0f172a] border-t border-white/5">
+      <section className="py-20 bg-[#0B1121] border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h3 className="font-display text-2xl font-bold text-white">Credentials & Education</h3>

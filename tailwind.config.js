@@ -7,50 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // The "Tech Consulting" Palette - Dark Base
-        void: '#030712', // Darker than black, slightly cool
-        panel: '#111827', // Card backgrounds
+        // The "Executive Club" Palette - Rich, Organic, Deep
+        void: '#05110e', // Very deep green-black (instead of cold blue-black)
+        panel: '#0a1f18', // Rich forest green panel
         
         // Brand Accents
         brand: {
           orange: '#F49D11', // Vibrant Logo Orange
-          green: '#004E36',  // Royal Green (Deep, Jewel-tone)
+          green: '#004E36',  // Royal Green
           sage: '#D8E1D1',   // Pale Sage
           cream: '#FDFDF7',  // Off-white Cream
           white: '#FFFFFF',  // Pure White
-          
-          // Gradients
-          gradient: 'linear-gradient(135deg, #F49D11 0%, #004E36 100%)',
+          gold: '#C7A46C',   // Antique Gold for elegance
         },
-        
-        surface: {
-          50: 'rgba(255, 255, 255, 0.05)',
-          100: 'rgba(255, 255, 255, 0.1)',
-          200: 'rgba(255, 255, 255, 0.2)',
-        }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+        display: ['Playfair Display', 'serif'], // Switched to Serif for Wisdom/Authority
       },
       backgroundImage: {
-        'glow-conic': 'conic-gradient(from 180deg at 50% 50%, #F49D11 0deg, #004E36 180deg, #F49D11 360deg)',
-        'grid-pattern': "linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'noise': "url('https://www.transparenttextures.com/patterns/stardust.png')", // Subtle noise texture
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'text-shimmer': 'text-shimmer 3s ease infinite',
+        'fade-in-up': 'fadeInUp 1s ease-out forwards',
       },
       keyframes: {
-        'text-shimmer': {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
-          },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
     },
