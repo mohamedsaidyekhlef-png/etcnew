@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Download, Users, ArrowRight, Award, Briefcase, GraduationCap, Target, Compass } from 'lucide-react';
+import { Download, Users, ArrowRight, Award, Briefcase, GraduationCap, Target, Compass, Calendar, Zap } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 
@@ -129,10 +129,10 @@ export const About = () => {
                </div>
                <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-8">Our Mission</h2>
                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light mb-8">
-                 The Mission of ETC is to provide a <span className="text-brand-orange italic font-serif">mastery of communication</span>, emotional and social intelligence skills; all designed for you and your organization to achieve success. 
+                 ETC Consulting is focused on <span className="text-white font-medium">CEOs, Executives, and Teams</span> to develop skills and uncover <span className="text-brand-orange italic font-serif">blind spots</span> that are holding them back.
                </p>
                <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                 We are a personal growth and development company. Our methodology includes Executive Coaching, Team Coaching, consulting and individually customized seminars. Additionally, with management diagnostics, we assist organizations to create <span className="text-white font-medium">alive and in action extraordinary possibilities</span>.
+                 We do this through Coaching, Consulting, and Workshops. Additionally, through specialized <strong className="text-white">4-Day Retreats</strong> and <strong className="text-white">Spot Coaching</strong>. The key is through the <strong className="text-brand-orange">EW Method</strong>... where communication is clearly developed both in giving and receiving.
                </p>
             </motion.div>
 
@@ -160,12 +160,11 @@ export const About = () => {
                   </blockquote>
                   
                   <div className="bg-white/5 rounded-xl p-6 border border-white/5">
-                    <p className="text-sm text-gray-400 font-medium mb-3 uppercase tracking-wider">Assessment Tools</p>
+                    <p className="text-sm text-gray-400 font-medium mb-3 uppercase tracking-wider">Specialized Formats</p>
                     <div className="flex flex-wrap gap-2">
-                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">MBTI</span>
-                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">BarOn EQ-I ®</span>
-                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white">Brain Pathways 360</span>
-                       <span className="px-3 py-1 rounded-full bg-brand-orange/20 text-xs text-brand-orange border border-brand-orange/20">Executive Whisperer™</span>
+                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white flex items-center gap-1"><Calendar size={12}/> 4-Day Retreats</span>
+                       <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white flex items-center gap-1"><Zap size={12}/> Spot Coaching</span>
+                       <span className="px-3 py-1 rounded-full bg-brand-orange/20 text-xs text-brand-orange border border-brand-orange/20">EW Method™</span>
                     </div>
                   </div>
                </motion.div>

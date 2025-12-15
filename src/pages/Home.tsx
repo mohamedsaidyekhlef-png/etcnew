@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Compass, Users, Target, Play, Quote } from 'lucide-react';
+import { Play, Quote, Compass, Target, Zap, Calendar } from 'lucide-react'; // Added icons
 import { Button } from '../components/ui/Button';
 import { ExplorationForm } from '../components/sections/ExplorationForm';
 import { Link } from 'react-router-dom';
@@ -98,18 +98,23 @@ export const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-brand-orange font-bold uppercase tracking-widest text-sm mb-4 block">Our Mission</span>
+              <span className="text-brand-orange font-bold uppercase tracking-widest text-sm mb-4 block">Our Focus</span>
               <h2 className="font-display text-4xl md:text-5xl mb-8 leading-tight">
-                Creating Alive & <br/>
-                <span className="text-brand-sage italic">Extraordinary Possibilities.</span>
+                Uncovering Blind Spots. <br/>
+                <span className="text-brand-sage italic">Deepening Awareness.</span>
               </h2>
-              <div className="prose prose-lg prose-invert text-gray-300 font-light">
-                <p className="mb-6">
-                  We are a personal growth and development company. Our methodology includes Executive Coaching, Team Coaching, consulting, and individually customized seminars.
+              <div className="prose prose-lg prose-invert text-gray-300 font-light leading-relaxed space-y-6">
+                <p>
+                  ETC Consulting is focused on <strong className="text-white">CEOs, Executives, and Teams</strong> to develop skills and identify blind spots that are holding them back.
                 </p>
                 <p>
-                  Additionally, with management diagnostics, we assist organizations to create alive and in action extraordinary possibilities.
+                  We do this through Coaching, Consulting, and Workshops. Additionally, through specialized <strong className="text-white">4-Day Retreats</strong> and <strong className="text-white">Spot Coaching</strong>.
                 </p>
+                <div className="bg-white/5 p-6 rounded-xl border-l-4 border-brand-orange">
+                  <p className="italic m-0">
+                    "The key is through the <strong className="text-brand-orange">EW Method</strong>... where communication is clearly developed both in giving and receiving. It is powerful when we open ourselves up to bringing blind spots to life, and through creating a deepening self-awareness."
+                  </p>
+                </div>
               </div>
             </motion.div>
 
@@ -147,7 +152,7 @@ export const Home = () => {
                 <Compass size={32} />
               </div>
               
-              <h3 className="font-display text-3xl mb-6">Coaching</h3>
+              <h3 className="font-display text-3xl mb-6">Coaching & Retreats</h3>
               <p className="text-gray-300 leading-relaxed mb-6">
                 A coach can help a client see options for becoming a more effective human being. Coaching helps individuals invent changes that are valuable, exciting, and intensely personal.
               </p>
@@ -159,7 +164,8 @@ export const Home = () => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-brand-sage">
-                <span>MBTI</span> • <span>BarOn EQ-I</span> • <span>Brain Pathways</span>
+                <span className="flex items-center gap-1"><Calendar size={12}/> 4-Day Retreats</span> • 
+                <span className="flex items-center gap-1"><Zap size={12}/> Spot Coaching</span>
               </div>
             </motion.div>
 
@@ -177,7 +183,7 @@ export const Home = () => {
                 <Target size={32} />
               </div>
               
-              <h3 className="font-display text-3xl mb-6">Consulting</h3>
+              <h3 className="font-display text-3xl mb-6">Consulting & Diagnostics</h3>
               <p className="text-gray-300 leading-relaxed mb-6">
                 ETC’s management philosophy has a broad background in business. We welcome the opportunity to come into organizations looking to identify performance gaps through a root cause analysis approach.
               </p>
